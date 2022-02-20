@@ -84,15 +84,21 @@ class Block {
 		</li>
 		<?php endforeach; ?>
 	</ul>
-	<p>
-		<?php
-		// translators: %s: post id.
-		// phpcs:ignore.
-		echo esc_html( sprintf( __( 'The current post ID is %s.', 'site-counts' ), sanitize_text_field( $_GET['post_id'] ?? '' ) ) );
-		?>
-	</p>
 
 		<?php
+		// phpcs:ignore.
+		if ( empty( $_GET['post_id'] ) ) {
+			?>
+	<p>
+			<?php
+			// translators: %s: post id.
+			// phpcs:ignore.
+			echo esc_html( sprintf( __( 'The current post ID is %s.', 'site-counts' ), sanitize_text_field( $_GET['post_id'] ) ) );
+			?>
+	</p>
+			<?php
+		}
+
 		$query = new WP_Query(
 			[
 				'post_type'              => [ 'post', 'page' ],
