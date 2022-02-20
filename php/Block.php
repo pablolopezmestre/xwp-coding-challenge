@@ -86,8 +86,8 @@ class Block {
 	</ul>
 	<p>
 		<?php
-		/* translators: %s: post id*/
-		// phpcs:ignore
+		// translators: %s: post id.
+		// phpcs:ignore.
 		echo esc_html( sprintf( __( 'The current post ID is %s.', 'site-counts' ), sanitize_text_field( $_GET['post_id'] ?? '' ) ) );
 		?>
 	</p>
@@ -116,7 +116,14 @@ class Block {
 		);
 	
 		if ( $query->have_posts() ) :
-			$posts = array_slice( $query->posts, 0, 5 );
+			$posts = array_filter(
+				$query->posts,
+				function ( $post ) {
+					return get_the_ID() != $post->ID;
+				}
+			);
+
+			$posts = array_slice( $posts, 0, 5 );
 			?>
 			<h2>
 			<?php
