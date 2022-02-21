@@ -130,20 +130,23 @@ class Block {
 			);
 
 			$posts = array_slice( $posts, 0, 5 );
-			?>
-			<h2>
-			<?php
-			/* translators: %s: number of posts*/
-			echo esc_html( sprintf( _n( '%s post with the tag of foo and the category of baz', '%s posts with the tag of foo and the category of baz', count( $posts ), 'site-counts' ), count( $posts ) ) );
-			?>
-			</h2>
-			<ul>
-			<?php 
-			foreach ( $posts as $post ) :
+
+			if ( ! empty( $posts ) ) {
 				?>
-				<li><?php echo esc_html( $post->post_title ); ?></li>
+				<h2>
 				<?php
-			endforeach;
+				/* translators: %s: number of posts*/
+				echo esc_html( sprintf( _n( '%s post with the tag of foo and the category of baz', '%s posts with the tag of foo and the category of baz', count( $posts ), 'site-counts' ), count( $posts ) ) );
+				?>
+				</h2>
+				<ul>
+				<?php 
+				foreach ( $posts as $post ) :
+					?>
+					<li><?php echo esc_html( $post->post_title ); ?></li>
+					<?php
+				endforeach;
+			}
 		endif;
 		?>
 	</ul>
