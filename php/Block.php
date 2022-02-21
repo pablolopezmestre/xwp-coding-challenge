@@ -139,7 +139,7 @@ class Block {
 			</h2>
 			<ul>
 			<?php 
-			foreach ( array_slice( $query->posts, 0, 5 ) as $post ) :
+			foreach ( $posts as $post ) :
 				?>
 				<li><?php echo esc_html( $post->post_title ); ?></li>
 				<?php
